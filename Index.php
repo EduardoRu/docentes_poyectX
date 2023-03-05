@@ -45,65 +45,47 @@
     <?php
     }
     ?>
-<!--Funcion filtro -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="crear.php" class="btn btn-primary mt-4">Crear alumno</a>
-                <hr>
-                <form method="post" class="form-inline">
-                    <div class="form-group mr-3">
-                        <input type="text" id="apellido" name="apellido" 
-                        placeholder="Buscar por apellido" class="form-control">
-                    </div>
-                    <button type="submit" name="submit" class="btn btn-primary">Ver resultados</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <!--Funcion filtro -->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="mt-3"><?= $titulo ?></h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
-                            <th>Edad</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($docente && $sentencia->rowCount() > 0) {
-                            foreach ($docente as $doc) {
-                        ?>
-                                <tr>
-                                    <td><?php echo escapar($doc["id"]); ?></td>
-                                    <td><?php echo escapar($doc["nombre"]); ?></td>
-                                    <td><?php echo escapar($doc["apellido_paterno"]); ?></td>
-                                    <td><?php echo escapar($doc["apellido_materno"]); ?></td>
-                                    <td><?php echo escapar($doc["correo_electronico"]); ?></td>
-                                    <td><?php echo escapar($doc["domicilio"]) ?></td>
-                                    <td><?php echo escapar($doc["telefono"]) ?></td>
-                                    <td><?php echo escapar($doc["escolaridad"]) ?></td>
-                                    <td><?php echo escapar($doc["nombre_carrera"]) ?></td>
-                                    <td>
-                                        <a href="<?= 'borrar.php?id=' . escapar($fila["idAlumno"]) ?>">🗑️Borrar</a>
-                                        <a href="<?= 'editar.php?id=' . escapar($fila["idAlumno"]) ?>" .>✏️Editar</a>
-                                    </td>
-                                </tr>
-                        <?php
-                            }
-                        }
-                        ?>
-                    <tbody>
-                </table>
+    <body id="page-top">
+        <div id="wrapper">
+            <?php include('./templases/sidebar.php'); ?>
+
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <?php include('./templases/nav.php'); ?>
+
+                    <!-- Comienzo de cuerpo de la pagina web -->
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Adminstración de candiatos a docentes</h1>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xl-12 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Docentes</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div>
+                                            Tabla con docentes
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
         </div>
-    </div>
+    </body>
     <?php include "./templases/footer.php" ?>
