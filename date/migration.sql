@@ -30,6 +30,7 @@ create TABLE candidatos_docentes (
   telefono INT NOT NULL,
   municipio VARCHAR(100) NOT NULL,
   escolaridad VARCHAR(100) NOT NULL,
+  status VARCHAR(60) NOT NULL DEFAULT 'pendiente',
   id_Carrera INT(11) UNSIGNED NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

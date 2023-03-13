@@ -12,7 +12,7 @@
             //$consultaSQL = "SELECT * FROM candidatos_docentes WHERE apellido LIKE
             // '%" . $_POST['apellido'] . "%'";
         } else {
-            $consultaSQL = "SELECT candidatos_docentes.*, carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
+            $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
             INNER JOIN carrera 
             ON candidatos_docentes.id_Carrera = carrera.id";
         }
@@ -21,6 +21,43 @@
         $sentencia->execute();
 
         $docente = $sentencia->fetchAll();
+
+        if ($sentencia->rowCount() > 0) {
+            foreach ($docente as $doc) {
+                if (isset($_POST['editCandidato_' . $doc['id']])) {
+                    $nuevoDocente = [
+                        'id'                    => $doc['id'],
+                        'nombre'                => $_POST['nomCandidato_' . $doc['id']],
+                        'apellido_paterno'      => $_POST['apP_' . $doc['id']],
+                        'apellido_materno'      => $_POST['apM_' . $doc['id']],
+                        'correo_electronico'    => $_POST['emailCandidato_' . $doc['id']],
+                        'domicilio'             => $_POST['domCandidato_' . $doc['id']],
+                        'telefono'              => $_POST['telCandidato_' . $doc['id']],
+                        'municipio'             => $_POST['munCandidato_' . $doc['id']],
+                        'escolaridad'           => $_POST['escCandidato_' . $doc['id']],
+                        'id_Carrera'            => $_POST['carreraCandidato_' . $doc['id']]
+                    ];
+
+                    $consultaSQLUpdate = "UPDATE candidatos_docentes SET
+                    nombre = :nombre,
+                    apellido_paterno = :apellido_paterno,
+                    apellido_materno = :apellido_materno,
+                    correo_electronico = :correo_electronico,
+                    domicilio = :domicilio,
+                    telefono = :telefono,
+                    municipio = :municipio,
+                    escolaridad = :escolaridad,
+                    id_Carrera = :id_Carrera,
+                    updated_at = NOW()
+                    WHERE id = :id";
+
+                    $sentenciaUpdate = $conexion->prepare($consultaSQLUpdate);
+                    $sentenciaUpdate->execute($nuevoDocente);
+
+                    header('Location: index.php');
+                }
+            }
+        }
     } catch (PDOException $error) {
         $error = $error->getMessage();
     }
@@ -29,22 +66,6 @@
     ?>
 
     <?php include "./templases/header.php" ?>
-
-    <?php
-    if ($error) {
-    ?>
-        <div class="container mt-2">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger" role="alert">
-                        <?= $error ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
     <!--Funcion filtro -->
 
     <body id="page-top">
@@ -57,6 +78,21 @@
 
                     <!-- Comienzo de cuerpo de la pagina web -->
                     <div class="container-fluid">
+                        <?php
+                        if ($error) {
+                        ?>
+                            <div class="container mt-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger" role="alert">
+                                            <?= $error ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Adminstración de candiatos a docentes</h1>
@@ -72,8 +108,53 @@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <div>
-                                            Tabla con docentes
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead class="table-primary">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Nombre</th>
+                                                        <th>Apellido paterno</th>
+                                                        <th>Apellido materno</th>
+                                                        <th>Email</th>
+                                                        <th>Domicilio</th>
+                                                        <th>Telefono</th>
+                                                        <th>Municipio</th>
+                                                        <th>Escolaridad</th>
+                                                        <th>Carrera interes</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    if ($docente && $sentencia->rowCount() > 0) {
+                                                        foreach ($docente as $fila) {
+                                                    ?>
+                                                            <tr class="text-center">
+                                                                <td><?php echo escapar($fila['id']) ?></td>
+                                                                <td><?php echo escapar($fila['nombre']) ?></td>
+                                                                <td><?php echo escapar($fila['apellido_paterno']) ?></td>
+                                                                <td><?php echo escapar($fila['apellido_materno']) ?></td>
+                                                                <td><?php echo escapar($fila['correo_electronico']) ?></td>
+                                                                <td><?php echo escapar($fila['domicilio']) ?></td>
+                                                                <td><?php echo escapar($fila['telefono']) ?></td>
+                                                                <td><?php echo escapar($fila['municipio']) ?></td>
+                                                                <td><?php echo escapar($fila['escolaridad']) ?></td>
+                                                                <td><?php echo escapar($fila['nombre_carrera']) ?></td>
+                                                                <td>
+                                                                    <?php include "templases/modal_candidatos.php"; ?>
+                                                                    <br>
+                                                                    <a href="" class="btn"><i class="fas fa-times"></i> Rechazar</a>
+                                                                    <br>
+                                                                    <a href="" class="btn"><i class="fas fa-check"></i> Aceptar</a>
+                                                                </td>
+                                                            </tr>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
