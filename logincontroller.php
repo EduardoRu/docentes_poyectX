@@ -19,6 +19,7 @@ if (isset($_POST['emailAdmin']) && isset($_POST['passAdmin'])) {
         $uemail = $user['email'];
         $upassword = $user['password'];
         $name = $user['nombre'];
+        $rol = $user['rol'];
         $id = $user['id'];
 
         if ($uemail === $email) {
@@ -26,8 +27,12 @@ if (isset($_POST['emailAdmin']) && isset($_POST['passAdmin'])) {
 
                 $_SESSION['id'] = $id;
                 $_SESSION['nombre'] = $name;
+                $_SESSION['rol'] = $rol;
 
                 header("Location: ./index.php");
+                exit;
+            }else{
+                header("Location: ./login.php");
                 exit;
             }
         }

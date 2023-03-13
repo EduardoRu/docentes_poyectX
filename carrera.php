@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['id']) && $_SESSION['nombre']) {
+if (isset($_SESSION['id']) && $_SESSION['nombre'] && $_SESSION['rol'] == 'admin') {
     include 'funciones.php';
     $error = false;
     $config = include 'config.php';
@@ -145,7 +145,11 @@ if (isset($_SESSION['id']) && $_SESSION['nombre']) {
         </div>
     </body>
 <?php include "./templases/footer.php";
-} else {
+}else if(isset($_SESSION['id']) && $_SESSION['nombre'] && $_SESSION['rol'] !== 'admin'){
+    header('Location: index.php');
+    exit;
+}
+ else {
     header("Location: ./login.php");
     exit;
 } ?>
