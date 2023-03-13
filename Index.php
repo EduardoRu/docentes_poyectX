@@ -8,9 +8,11 @@
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        if (isset($_POST['apellido'])) {
-            //$consultaSQL = "SELECT * FROM candidatos_docentes WHERE apellido LIKE
-            // '%" . $_POST['apellido'] . "%'";
+        if (isset($_POST['buscarDocente'])) {
+            $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
+            INNER JOIN carrera 
+            ON candidatos_docentes.id_Carrera = carrera.id
+            WHERE nombre LIKE'%" . $_POST['nombreDocente'] . "%' AND candidatos_docentes.status = 'pendiente'";
         } else {
             $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
             INNER JOIN carrera 
@@ -63,7 +65,7 @@
         $error = $error->getMessage();
     }
 
-    $titulo = isset($_POST['apellido']) ? 'Lista de alumnos (' . $_POST['apellido'] . ')' : 'Lista de alumnos';
+    $titulo = isset($_POST['buscarDocente']) ? 'Lista de docentes (' . $_POST['nombreDocente'] . ')' : 'Lista de docentes';
     ?>
 
     <?php include "./templases/header.php" ?>

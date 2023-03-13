@@ -8,9 +8,8 @@
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        if (isset($_POST['apellido'])) {
-            //$consultaSQL = "SELECT * FROM candidatos_docentes WHERE apellido LIKE
-            // '%" . $_POST['apellido'] . "%'";
+        if (isset($_POST['buscarCarrera'])) {
+            $consultaSQL = "SELECT * FROM carrera WHERE nombre_carrera LIKE '%" . $_POST['nombreCarrera'] . "%'";
         } else {
             $consultaSQL = "SELECT * FROM carrera";
         }
@@ -51,7 +50,7 @@
         }
     }
 
-    $titulo = isset($_POST['apellido']) ? 'Lista de alumnos (' . $_POST['apellido'] . ')' : 'Lista de alumnos';
+    $titulo = isset($_POST['buscarCarrera']) ? 'Lista de carreras (' . $_POST['nombreCarrera'] . ')' : 'Lista de carreras';
     ?>
 
     <?php include "./templases/header.php" ?>
