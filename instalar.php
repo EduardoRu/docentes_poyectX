@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+if (isset($_SESSION['id']) && $_SESSION['nombre']) {
 $config = include 'config.php';
 
 try {
@@ -14,3 +15,8 @@ try {
 } catch(PDOException $error) {
   echo $error->getMessage();
 }
+}else{
+  header("Location: ./login.php");
+  exit;
+}
+?>

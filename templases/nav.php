@@ -80,21 +80,8 @@
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mr-2 d-lg-inline fas fa-user fa-sm"></i>
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nombre del admin</span>
-            </a>
-            <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Cerrar sesión
-                </a>
-                <div class="dropdown-divider"></div>
-            </div>
+        <li class="nav-item">
+            <a href="logout.php" class="nav-link"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar sesión</a>
         </li>
-
     </ul>
-
 </nav>

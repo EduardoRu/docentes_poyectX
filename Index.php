@@ -1,6 +1,7 @@
     <?php
-    include 'funciones.php';
     session_start();
+    if (isset($_SESSION['id']) && $_SESSION['nombre']) {
+    include 'funciones.php';
     $error = false;
     $config = include 'config.php';
     $pagina = 'index';
@@ -172,4 +173,8 @@
 
         </div>
     </body>
-    <?php include "./templases/footer.php" ?>
+    <?php include "./templases/footer.php";
+    }else{
+        header("Location: ./login.php");
+        exit;
+    } ?>

@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+if (isset($_SESSION['id']) && $_SESSION['nombre']) {
 //inclusion del archivo "funciones" y sus funciones
 include 'funciones.php';
 
@@ -68,4 +69,8 @@ try {
   </div>
 </div>
 
-<?php include "./templases/footer.php" ?>
+<?php include "./templases/footer.php";
+}else{
+  header("Location: ./login.php");
+  exit;
+}?>

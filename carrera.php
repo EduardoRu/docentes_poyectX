@@ -1,6 +1,7 @@
 <?php
+session_start();
+if (isset($_SESSION['id']) && $_SESSION['nombre']) {
     include 'funciones.php';
-    session_start();
     $error = false;
     $config = include 'config.php';
     $pagina = 'carrera';
@@ -19,16 +20,16 @@
 
         $carrera = $sentencia->fetchAll();
 
-        if($sentencia->rowCount() > 0){
-            foreach($carrera as $car){
-                if(isset($_POST['editCarrera_'.$car['id']])){
-                    try{
-                        $consultaSQLUpdate = "UPDATE carrera SET nombre_carrera = '".$_POST['nomCarrera_'.$car['id']]."', updated_at = NOW() WHERE id = ".$car['id'];
+        if ($sentencia->rowCount() > 0) {
+            foreach ($carrera as $car) {
+                if (isset($_POST['editCarrera_' . $car['id']])) {
+                    try {
+                        $consultaSQLUpdate = "UPDATE carrera SET nombre_carrera = '" . $_POST['nomCarrera_' . $car['id']] . "', updated_at = NOW() WHERE id = " . $car['id'];
                         $sentenciaUpdate = $conexion->prepare($consultaSQLUpdate);
                         $sentenciaUpdate->execute();
 
-                        header('Location: carrera.php');    
-                    }catch(PDOException $error){
+                        header('Location: carrera.php');
+                    } catch (PDOException $error) {
                         $error = $error->getMessage();
                     }
                 }
@@ -38,20 +39,20 @@
         $error = $error->getMessage();
     }
 
-    if(isset($_POST['crearCarrera'])){
-        try{
-            $consultaSQLAgregar = "INSERT INTO carrera (nombre_carrera) VALUES ('".$_POST['nomCarrera']."')";
+    if (isset($_POST['crearCarrera'])) {
+        try {
+            $consultaSQLAgregar = "INSERT INTO carrera (nombre_carrera) VALUES ('" . $_POST['nomCarrera'] . "')";
             $sentenciaAgregar = $conexion->prepare($consultaSQLAgregar);
             $sentenciaAgregar->execute();
 
             header('Location: carrera.php');
-        }catch(PDOException $error){
+        } catch (PDOException $error) {
             $error = $error->getMessage();
         }
     }
 
     $titulo = isset($_POST['buscarCarrera']) ? 'Lista de carreras (' . $_POST['nombreCarrera'] . ')' : 'Lista de carreras';
-    ?>
+?>
 
     <?php include "./templases/header.php" ?>
     <!--Funcion filtro -->
@@ -120,7 +121,7 @@
                                                                 <td><?php echo escapar($fila['updated_at']) ?></td>
                                                                 <td>
                                                                     <?php include "templases/modal_carrera.php"; ?>
-                                                                    <a href="borrar.php?id=<?php echo escapar($fila['id']).'&estado=borrar_carrera' ?>" class="btn"><i class="fas fa-times"></i> Eliminar</a>
+                                                                    <a href="borrar.php?id=<?php echo escapar($fila['id']) . '&estado=borrar_carrera' ?>" class="btn"><i class="fas fa-times"></i> Eliminar</a>
                                                                 </td>
                                                             </tr>
                                                     <?php
@@ -143,4 +144,8 @@
 
         </div>
     </body>
-    <?php include "./templases/footer.php" ?>
+<?php include "./templases/footer.php";
+} else {
+    header("Location: ./login.php");
+    exit;
+} ?>
