@@ -21,9 +21,17 @@ try {
   
   //Id recibido de la pagina principal*/
   $id = $_GET['id'];
+  $estado = $_GET['estado'];
   
   //consulata a base de datos*/
-  $consultaSQL = "DELETE FROM alumnos WHERE idAlumno =" . $id;
+  if($estado == 'aceptado'){
+    $consultaSQL = "UPDATE candidatos_docentes SET status = 'aceptado' WHERE id =" . $id;
+  }else if($estado == 'rechazado'){
+    $consultaSQL = "DELETE FROM candidatos_docentes WHERE id =" . $id;
+  }else if($estado == 'borrar'){
+    $consultaSQL = "DELETE FROM candidatos_docentes WHERE id =" . $id;
+  }
+  
   
   //Sentencia o funcion de la base de datos*/
   $sentencia = $conexion->prepare($consultaSQL);

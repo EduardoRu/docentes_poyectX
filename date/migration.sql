@@ -27,7 +27,7 @@ create TABLE candidatos_docentes (
   apellido_materno VARCHAR(60) NOT NULL,
   correo_electronico VARCHAR(60) NOT NULL,
   domicilio VARCHAR(100) NOT NULL,
-  telefono INT NOT NULL,
+  telefono BIGINT NOT NULL,
   municipio VARCHAR(100) NOT NULL,
   escolaridad VARCHAR(100) NOT NULL,
   status VARCHAR(60) NOT NULL DEFAULT 'pendiente',

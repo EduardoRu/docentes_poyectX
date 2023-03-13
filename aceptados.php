@@ -1,4 +1,4 @@
-    <?php
+<?php
     include 'funciones.php';
     session_start();
     $error = false;
@@ -14,8 +14,7 @@
         } else {
             $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
             INNER JOIN carrera 
-            ON candidatos_docentes.id_Carrera = carrera.id
-            WHERE candidatos_docentes.status = 'pendiente'";
+            ON candidatos_docentes.id_Carrera = carrera.id WHERE candidatos_docentes.status = 'aceptado'";
         }
 
         $sentencia = $conexion->prepare($consultaSQL);
@@ -55,7 +54,7 @@
                     $sentenciaUpdate = $conexion->prepare($consultaSQLUpdate);
                     $sentenciaUpdate->execute($nuevoDocente);
 
-                    header('Location: index.php');
+                    header('Location: aceptados.php');
                 }
             }
         }
@@ -145,9 +144,7 @@
                                                                 <td>
                                                                     <?php include "templases/modal_candidatos.php"; ?>
                                                                     <br>
-                                                                    <a href="borrar.php?id=<?php echo escapar($fila['id']).'&estado=rechazado' ?>" class="btn"><i class="fas fa-times"></i> Rechazar</a>
-                                                                    <br>
-                                                                    <a href="borrar.php?id=<?php echo escapar($fila['id']).'&estado=aceptado' ?>" class="btn"><i class="fas fa-check"></i> Aceptar</a>
+                                                                    <a href="borrar.php?id=<?php echo escapar($fila['id']).'&estado=borrar' ?>" class="btn"><i class="fas fa-times"></i> Eliminar</a>
                                                                 </td>
                                                             </tr>
                                                     <?php
