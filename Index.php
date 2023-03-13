@@ -3,7 +3,7 @@
     session_start();
     $error = false;
     $config = include 'config.php';
-
+    $pagina = 'index';
     try {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);

@@ -14,34 +14,43 @@ $resultado = [
 ];
 
 try {
-  
+
   //Conexcion a base de datos (Es la misma para todos los documento)*/
   $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
   $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-  
+
   //Id recibido de la pagina principal*/
   $id = $_GET['id'];
   $estado = $_GET['estado'];
-  
+
   //consulata a base de datos*/
-  if($estado == 'aceptado'){
+  if ($estado == 'aceptado') {
     $consultaSQL = "UPDATE candidatos_docentes SET status = 'aceptado' WHERE id =" . $id;
-  }else if($estado == 'rechazado'){
+    $sentencia = $conexion->prepare($consultaSQL);
+    $sentencia->execute();
+
+    header('Location: index.php');
+  } else if ($estado == 'rechazado') {
     $consultaSQL = "DELETE FROM candidatos_docentes WHERE id =" . $id;
-  }else if($estado == 'borrar'){
+    $sentencia = $conexion->prepare($consultaSQL);
+    $sentencia->execute();
+
+    header('Location: index.php');
+  } else if ($estado == 'borrar') {
     $consultaSQL = "DELETE FROM candidatos_docentes WHERE id =" . $id;
+    $sentencia = $conexion->prepare($consultaSQL);
+    $sentencia->execute();
+
+    header('Location: aceptados.php');
+  } else if ($estado == 'borrar_carrera') {
+    $consultaSQL = "DELETE FROM carrera WHERE id =" . $id;
+    $sentencia = $conexion->prepare($consultaSQL);
+    $sentencia->execute();
+
+    header('Location: carrera.php');
   }
-  
-  
-  //Sentencia o funcion de la base de datos*/
-  $sentencia = $conexion->prepare($consultaSQL);
-  $sentencia->execute();
 
-  /*Sentencia para que al finalisar el proceso 
-    retorne al usuario el archivo index*/
-  header('Location: ./index.php');
-
-} catch(PDOException $error) {
+} catch (PDOException $error) {
   $resultado['error'] = true;
   $resultado['mensaje'] = $error->getMessage();
 }

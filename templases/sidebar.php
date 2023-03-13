@@ -42,7 +42,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Opciones para carreras:</h6>
-                <a class="collapse-item" href="buttons.html">Agregar carrera</a>
+                <a class="collapse-item" href="carrera.php">Agregar carrera</a>
             </div>
         </div>
     </li>
