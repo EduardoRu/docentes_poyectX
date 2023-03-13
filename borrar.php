@@ -49,6 +49,12 @@ try {
     $sentencia->execute();
 
     header('Location: carrera.php');
+  }else if($estado == 'borrar_usuario'){
+    $consultaSQL = "DELETE FROM usuario WHERE id =" . $id;
+    $sentencia = $conexion->prepare($consultaSQL);
+    $sentencia->execute();
+
+    header('Location: usuarios.php');
   }
 
 } catch (PDOException $error) {

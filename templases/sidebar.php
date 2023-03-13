@@ -36,7 +36,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-school"></i>
             <span>Carreras</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -47,6 +47,19 @@
         </div>
     </li>
 
+    <!-- Nav Item drop down para los usuarios -->
+    <li class="nav-item">
+        <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#collpaseOne" aria-expanded="true" aria-controls="collpaseOne">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span>
+        </a>
+        <div id="collpaseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header"> Opciones usuarios </h6>
+                <a class="collapse-item" href="usuarios.php">Admin usuarios</a>
+            </div>
+        </div>
+    </li>
     <!-- End of Sidebar -->
 
     <!-- Hide side menu -->

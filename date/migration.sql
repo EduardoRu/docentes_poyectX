@@ -9,6 +9,7 @@ CREATE TABLE usuario (
   apellido_materno VARCHAR(60) NOT NULL,
   email VARCHAR(80) NOT NULL,
   password LONGTEXT NOT NULL,
+  rol VARCHAR(50) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -37,4 +38,4 @@ create TABLE candidatos_docentes (
   FOREIGN KEY (id_Carrera) REFERENCES carrera(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 # mariel123
-INSERT INTO `usuario` (, `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `password`, `created_at`, `updated_at`) VALUES ('Mariel S.', 'Saucedo', 'Hernández', 'mariel@gmail.com', '$2y$10$2Ah1NLTKDfewDL36VaG.BeJ1OVgq/Ez1ncaSSDCTUaTX3tOO52zZ.', current_timestamp(), current_timestamp());
+INSERT INTO `usuario` (`nombre`, `apellido_paterno`, `apellido_materno`, `email`, `password`, `rol` ,`created_at`, `updated_at`) VALUES ('Mariel S.', 'Saucedo', 'Hernández', 'mariel@gmail.com', '$2y$10$2Ah1NLTKDfewDL36VaG.BeJ1OVgq/Ez1ncaSSDCTUaTX3tOO52zZ.', 'admin',current_timestamp(), current_timestamp());
