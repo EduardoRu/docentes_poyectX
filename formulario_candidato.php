@@ -37,11 +37,10 @@ if (isset($_POST['datosDocente'])) {
         ];
 
         $consultaSQLAgregar = "INSERT INTO candidatos_docentes (nombre, apellido_paterno, apellido_materno, correo_electronico, domicilio, telefono, municipio, escolaridad, id_Carrera)";
-        $consultaSQLAgregar.= "VALUES (:" . implode(", :", array_keys($datosdocente)) . ")";
+        $consultaSQLAgregar .= "VALUES (:" . implode(", :", array_keys($datosdocente)) . ")";
 
         $sentenciaAgregar = $conexion->prepare($consultaSQLAgregar);
         $sentenciaAgregar->execute($datosdocente);
-
     } catch (PDOException $error) {
         $resultado = [
             'error' => true,
@@ -73,7 +72,6 @@ if (isset($_POST['datosDocente'])) {
             </div>
             <div class="container">
                 <div class="text-center mb-4">
-                    <h3>Favor de ingresar sus datos si esta interesado en ser docente</h3>
                     <?php
                     if (isset($resultado)) {
                     ?>
@@ -90,53 +88,61 @@ if (isset($_POST['datosDocente'])) {
                     }
                     ?>
                 </div>
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label for="">Nombre del candidato</label>
-                        <input type="text" class="form-control" id="nomCandidato" name="nomCandidato" placeholder="Nombre o nombres" required>
+                <div class="card mb-5 shadow rounded-2">
+                    <div class="card-header text-center">
+                        <h3>Favor de ingresar sus datos si esta interesado en ser docente</h3>
                     </div>
-                    <label for="">Apellido paterno y materno</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="apP" name="apP" placeholder="Apellido paterno" required>
-                        <input type="text" class="form-control" id="apM" name="apM" placeholder="Apellido materno" required>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="">Nombre del candidato</label>
+                                <input type="text" class="form-control" id="nomCandidato" name="nomCandidato" placeholder="Nombre o nombres" required>
+                            </div>
+                            <label for="">Apellido paterno y materno</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="apP" name="apP" placeholder="Apellido paterno" required>
+                                <input type="text" class="form-control" id="apM" name="apM" placeholder="Apellido materno" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Correo electronico</label>
+                                <input type="email" class="form-control" id="emailCandidato" name="emailCandidato" placeholder="Email del candidato" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Domicilio</label>
+                                <input type="text" class="form-control" id="domCandidato" name="domCandidato" placeholder="Domicilio del candidato" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="number" class="form-control" id="telCandidato" name="telCandidato" placeholder="Telefono del candidato" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Municipio</label>
+                                <input type="text" class="form-control" id="munCandidato" name="munCandidato" placeholder="Municipio del candidato" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Escolaridad</label>
+                                <input type="text" class="form-control" id="escCandidato" name="escCandidato" placeholder="Escolaridad del candidato" required>
+                            </div>
+                            <div class="form-group">
+                                <label for=""> Carrera de interes </label>
+                                <select name="carreraCandidato" id="carreraCandidato" class="form-select">
+                                    <option value=""></option>
+                                    <?php
+                                    foreach ($carreras as $car) {
+                                    ?>
+                                        <option value="<?= escapar($car['id']) ?>"><?php echo escapar($car['nombre_carrera']) ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <hr class="border border-dark">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" id="datosDocente" name="datosDocente">Enviar mis datos</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="">Correo electronico</label>
-                        <input type="email" class="form-control" id="emailCandidato" name="emailCandidato" placeholder="Email del candidato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Domicilio</label>
-                        <input type="text" class="form-control" id="domCandidato" name="domCandidato" placeholder="Domicilio del candidato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono</label>
-                        <input type="number" class="form-control" id="telCandidato" name="telCandidato" placeholder="Telefono del candidato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Municipio</label>
-                        <input type="text" class="form-control" id="munCandidato" name="munCandidato" placeholder="Municipio del candidato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Escolaridad</label>
-                        <input type="text" class="form-control" id="escCandidato" name="escCandidato" placeholder="Escolaridad del candidato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for=""> Carrera de interes </label>
-                        <select name="carreraCandidato" id="carreraCandidato" class="form-select">
-                            <option value=""></option>
-                            <?php
-                            foreach ($carreras as $car) {
-                            ?>
-                                <option value="<?= escapar($car['id']) ?>"><?php echo escapar($car['nombre_carrera']) ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary" id="datosDocente" name="datosDocente">Enviar mis datos</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
