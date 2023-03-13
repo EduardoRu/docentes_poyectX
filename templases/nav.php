@@ -6,35 +6,16 @@
     </button>
 
     <!-- Topbar Search -->
-    <?php
-    if ($pagina == 'aceptados' || $pagina == 'index') {
-    ?>
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
-            <div class="input-group">
-                <input type="text" id="nombreDocente" name="nombreDocente" class="form-control bg-light border-0 small" placeholder="Buscar docente ..." aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" name="buscarDocente" id="buscarDocente">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
+        <div class="input-group">
+            <input type="text" id="buscarNombre" name="buscarNombre" class="form-control bg-light border-0 small" placeholder="Buscar docente ..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" name="buscarBuscar" id="buscarBuscar">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
             </div>
-        </form>
-    <?php
-    } else {
-    ?>
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
-            <div class="input-group">
-                <input type="text" id="nombreCarrera" name="nombreCarrera" class="form-control bg-light border-0 small" placeholder="Buscar docente ..." aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" name="buscarCarrera" id="buscarCarrera">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    <?php
-    }
-    ?>
+        </div>
+    </form>
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
@@ -45,35 +26,16 @@
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <?php
-                if ($pagina == 'aceptados' || $pagina == 'index') {
-                ?>
-                    <form class="form-inline mr-auto w-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" id="nombreDocente" name="nombreDocente" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" name="buscarDocente" id="buscarDocente">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" id="buscarNombre" name="buscarNombre" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" name="buscarBuscar" id="buscarBuscar">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
-                    </form>
-                <?php
-                } else {
-                ?>
-                    <form class="form-inline mr-auto w-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" id="nombreCarrera" name="nombreCarrera" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" name="buscarCarrera" id="buscarCarrera">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                <?php
-                }
-                ?>
+                    </div>
+                </form>
             </div>
         </li>
 

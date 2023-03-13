@@ -9,8 +9,8 @@ if (isset($_SESSION['id']) && $_SESSION['nombre']) {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        if (isset($_POST['buscarCarrera'])) {
-            $consultaSQL = "SELECT * FROM carrera WHERE nombre_carrera LIKE '%" . $_POST['nombreCarrera'] . "%'";
+        if (isset($_POST['buscarBuscar'])) {
+            $consultaSQL = "SELECT * FROM carrera WHERE nombre_carrera LIKE '%" . $_POST['buscarNombre'] . "%'";
         } else {
             $consultaSQL = "SELECT * FROM carrera";
         }

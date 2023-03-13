@@ -9,11 +9,11 @@
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        if (isset($_POST['buscarDocente'])) {
+        if (isset($_POST['buscarBuscar'])) {
             $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
             INNER JOIN carrera 
             ON candidatos_docentes.id_Carrera = carrera.id
-            WHERE nombre LIKE'%" . $_POST['nombreDocente'] . "%' AND candidatos_docentes.status = 'pendiente'";
+            WHERE nombre LIKE'%" . $_POST['buscarNombre'] . "%' AND candidatos_docentes.status = 'pendiente'";
         } else {
             $consultaSQL = "SELECT candidatos_docentes.*, carrera.id AS 'id_CCarrera' ,carrera.nombre_carrera AS 'nombre_carrera' FROM candidatos_docentes 
             INNER JOIN carrera 

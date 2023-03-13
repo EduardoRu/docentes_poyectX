@@ -9,8 +9,8 @@ if (isset($_SESSION['id']) && $_SESSION['nombre']) {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        if (isset($_POST['buscarCarrera'])) {
-            $consultaSQL = "SELECT * FROM usuario WHERE nombre LIKE '%" . $_POST['nombreCarrera'] . "%'";
+        if (isset($_POST['buscarBuscar'])) {
+            $consultaSQL = "SELECT * FROM usuario WHERE nombre LIKE '%" . $_POST['buscarNombre'] . "%'";
         } else {
             $consultaSQL = "SELECT * FROM usuario";
         }
@@ -88,7 +88,7 @@ if (isset($_SESSION['id']) && $_SESSION['nombre']) {
             $sentenciaAgregar = $conexion->prepare($consultaSQLAgregar);
             $sentenciaAgregar->execute($usuario);
 
-            header('Location: usuario.php');
+            header('Location: usuarios.php');
         } catch (PDOException $error) {
             $error = $error->getMessage();
         }
